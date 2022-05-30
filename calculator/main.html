@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="main.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <title>calculor</title>
+  </head>
+  <body>
+    <form class="conteiner" name="conteiner">
+       <button id="display" disabled>0</button>
+       <button type="button" onclick="clickButton(this)">1</button>
+       <button type="button" onclick="clickButton(this)">2</button>
+       <button type="button" onclick="clickButton(this)">3</button>
+       <button type="button" onclick="operator_button(this)">+</button>
+       <button type="button" onclick="clickButton(this)">4</button>
+       <button type="button" onclick="clickButton(this)">5</button>
+       <button type="button" onclick="clickButton(this)">6</button>
+       <button type="button" onclick="operator_button(this)">-</button>
+       <button type="button" onclick="clickButton(this)">7</button>
+       <button type="button" onclick="clickButton(this)">8</button>
+       <button type="button" onclick="clickButton(this)">9</button>
+       <button type="button" onclick="operator_button(this)">*</button>
+       <button type="button" onclick="clickButton(this)">0</button>
+       <button type="button" onclick="clickButton(this)">00</button>
+       <button type="button" onclick="clickButton(this)">.</button>
+       <button type="button" onclick="operator_button(this)">/</button>
+       <button type="button" onclick="click_AC()" class="button-under">AC</button>
+       <button type="button" onclick="equal_button(this)" class="button-under">=</button>
+    </form>
+  <script type="text/javascript" charset="utf-8">
+   let calc = false;
+   let disp = document.getElementById("display");
+   
+   function click_AC(){
+     disp.innerHTML = "0";
+     calc = false;
+   }
+   function clickButton(target){
+     if(calc)
+       disp.innerHTML = "0";
+       calc = false;
+     
+     if(disp.innerHTML == "0" && target.innerHTML == "0" || disp.innerHTML == "0" && target.innerHTML== "00"){
+       disp.innerHTML = "0";
+     }else if(disp.innerHTML == "0" && target.innerHTML == "." || disp.innerHTML == "0." && target.innerHTML =="."){
+       disp.innerHTML = "0.";
+     }else if(disp.innerHTML == "0"){
+       disp.innerHTML = target.innerHTML;
+     }else{
+      disp.innerHTML += target.innerHTML;
+     }
+   }
+   
+   function operator_button(target){
+     if(calc)
+       calc = false;
+     
+     if(operator_last()){
+       disp.innerHTML = disp.innerHTML.slice(0,-1)+target.innerHTML;
+     }else{
+       disp.innerHTML += target.innerHTML;
+     }
+   }
+   
+   function equal_button(target){
+     if(operator_last())
+       disp.innerHTML = disp.innerHTML.slice(-1);
+     let value = eval(disp.innerHTML);
+     if(value == Infinity || Number.isNaN(value)){
+       disp.innerHTML = "Error";
+     }else{
+       disp.innerHTML = value;
+       calc = true;
+     }
+     
+   }
+  function operator_last(){
+       return["+","-","*","/"].includes(disp.innerHTML.slice(-1));}
+  </script>
+  </body>
+</html>

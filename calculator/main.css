@@ -1,0 +1,24 @@
+button{
+  width: 23%;
+  margin:1%;
+  padding:20px 0;
+  color: black;
+  font-size: x-large;
+}
+.button-under{
+  width: 48%;
+}
+
+form{
+  display: flex;
+  flex-wrap:wrap;
+  width: 400px;
+  height: 300px;
+}
+#display{
+  background-color: black;
+  width:100%;
+  padding: 20px 0;
+  color: white;
+  text-align: right;
+}
